@@ -10,7 +10,7 @@ import UIKit
 
 class TXSocket {
     
-    fileprivate var tcpClient : TCPClient
+     var tcpClient : TCPClient
     
     init(address : String, port : Int32) {
         tcpClient = TCPClient(address: address, port: port)
