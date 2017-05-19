@@ -22,10 +22,10 @@ class ViewController: UIViewController {
         
         //获取data
         guard let user = try? userinfo.build() else{ return }
-        let data = user.data()
-        // 发送data
-        txSocket.tcpClient.send(data: data)
-        
+//        let data = user.data()
+//        // 发送data
+//        txSocket.tcpClient.send(data: data)
+//        
         
         
         let chatMsg = ChatMessage.Builder()
@@ -39,35 +39,46 @@ class ViewController: UIViewController {
         giftMsg.giftIcon = "hj.png"
         giftMsg.giftCount = 1
         
+    
         
-        
-        
-        
-        
-        
-        
-        //解析
-        guard let userInfo = try? UserInfo.parseFrom(data: data) else {
-            return
-        }
-        
-        print(userInfo.name)
-        print(userInfo.icon)
-        print(userInfo.level)
-        
-        
+//        //解析
+//        guard let userInfo = try? UserInfo.parseFrom(data: data) else {
+//            return
+//        }
+//        
+//        print(userInfo.name)
+//        print(userInfo.icon)
+//        print(userInfo.level)
+//        
+//        
         
         if txSocket.connectServer() {
             print("连接成功。。。")
         }
     }
 
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        txSocket .sendMsg("Hello,World!")
+    
+    @IBAction func EnterRoom(_ sender: UIButton) {
+        txSocket.enterRoom()
+    }
+    
+    
+    @IBAction func LeaveRoom(_ sender: UIButton) {
+        txSocket.leaveRoom()
+    }
+    
+    
+    @IBAction func SendMsg(_ sender: UIButton) {
+        txSocket.sendTextMsg(messageText: "111111")
+    }
+    
+    
+    @IBAction func SendGift(_ sender: UIButton) {
+        txSocket.sendGiftMsg("火箭礼物", "111.png", "1111.gif", 1)
     }
 
+
 }
+
 
 
